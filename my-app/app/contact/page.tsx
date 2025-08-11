@@ -1,9 +1,13 @@
-import React from 'react';
+import { getMarkdownContent } from '../../lib/markdown';
 
-const ContactPage = () => {
+export default async function ContactPage() {
+  const { title, contentHtml } = await getMarkdownContent('contact');
+
   return (
     <div>
-      <h1 className="text-4xl font-bold">Contact Us</h1>
+      <h1 className="text-4xl font-bold">{title as string}</h1>
+      <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+
       <form className="mt-8">
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
@@ -52,6 +56,4 @@ const ContactPage = () => {
       </form>
     </div>
   );
-};
-
-export default ContactPage;
+}

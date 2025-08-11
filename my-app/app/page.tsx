@@ -1,12 +1,12 @@
-import React from 'react';
+import { getMarkdownContent } from '../lib/markdown';
 
-const HomePage = () => {
+export default async function HomePage() {
+  const { title, contentHtml } = await getMarkdownContent('home');
+
   return (
     <div>
-      <h1 className="text-4xl font-bold">Welcome to our Website</h1>
-      <p className="mt-4">This is the homepage.</p>
+      <h1 className="text-4xl font-bold">{title as string}</h1>
+      <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
     </div>
   );
-};
-
-export default HomePage;
+}
